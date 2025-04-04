@@ -1,5 +1,7 @@
 package com.pragmatic.selenium.pages;
 
+import com.pragmatic.selenium.util.ActionBot;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginFactoryPage {
     private final WebDriver driver;
-
+    private ActionBot actionBot;
     //Elements Definition
     @FindBy(id = "user-name")
     WebElement eleUsername;
@@ -15,29 +17,32 @@ public class LoginFactoryPage {
     @FindBy(id = "password")
     WebElement elePassword;
 
-    @FindBy(id = "login-button")
-    WebElement eleLoginButton;
+    private final By byLoginButton = By.id("login-button");
 
     @FindBy(css = "h3[data-test='error']")
     WebElement eleLoginError;
 
     public LoginFactoryPage(WebDriver driver) {
         this.driver = driver;
+        actionBot = new ActionBot(driver);
         //init element
         PageFactory.initElements(driver,this);
     }
     public LoginFactoryPage typeUsername(String username) {
         eleUsername.sendKeys(username);
+        //actionBot.clearAndType(eleUsername,username);
         return this;
     }
 
     public LoginFactoryPage typePassword(String password) {
         elePassword.sendKeys(password);
+        //actionBot.clearAndType(elePassword,password);
         return this;
     }
 
     public void clickLogin() {
-        eleLoginButton.click();
+        //eleLoginButton.click();
+        actionBot.waitAndClick(byLoginButton);
     }
 
     public String getError() {
