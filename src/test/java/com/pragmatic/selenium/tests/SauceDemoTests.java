@@ -95,7 +95,7 @@ public class SauceDemoTests {
         CheckoutInformationPage.clearAndTypePersonalDetails();
         checkoutInformationPage.eleContinueButton.click();
         Assert.assertEquals(checkoutOverviewPage.getTitle(), "Checkout: Overview", "Navigation Failed - Go to Checkout: Overview Page ");
-        Assert.assertEquals(checkoutOverviewPage.getEleItemTotal().getText(), "Item total: $89.97", "Item Total is Wrong! ");
+        Assert.assertEquals(checkoutOverviewPage.getEleItemTotal().getText(), "Item total: $89.97", "Item Total is Wrong ");
         Assert.assertEquals(checkoutOverviewPage.getEleTotal().getText(), "Total: $97.17", "Bill Total is Wrong! ");
         checkoutOverviewPage.clickFinish();
     }
@@ -110,6 +110,6 @@ public class SauceDemoTests {
         checkoutInformationPage.eleContinueButton.click();
         checkoutOverviewPage.clickFinish();
         Assert.assertEquals(checkoutCompletePage.getTitle(), "Checkout: Complete!", "Error - Checkout process incomplete");
-        Assert.assertEquals(checkoutCompletePage.eleCompleteMessage.getText(), "", "");
+        Assert.assertEquals(checkoutCompletePage.eleCompleteMessage.getText(), "Your order has been dispatched, and will arrive just as fast as the pony can get there!", "Error in checkout completion");
     }
 }
