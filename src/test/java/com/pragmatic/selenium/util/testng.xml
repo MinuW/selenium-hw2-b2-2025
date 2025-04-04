@@ -2,7 +2,16 @@
 <suite name="SauceDemo Test Suite">
     <test name="SauceDemo Tests">
         <classes>
-            <class name="com.pragmatic.selenium.tests.SauceDemoTests"/>
+            <class name="com.pragmatic.selenium.tests.SauceDemoTests">
+            <methods>
+                <include name="testLoginWithValidCredentials"/>
+                <include name="testAddProductsToCart"/>
+                <include name="testProductsInTheCart"/>
+                <include name="testUserDetails"/>
+                <include name="testOrderCheckOutDetails"/>
+                <include name="testOrderCompletionPage"/>
+            </methods>
+            </class>
         </classes>
     </test>
 </suite>
