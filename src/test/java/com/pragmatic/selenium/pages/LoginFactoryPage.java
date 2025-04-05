@@ -28,6 +28,7 @@ public class LoginFactoryPage {
         //init element
         PageFactory.initElements(driver,this);
     }
+
     public LoginFactoryPage typeUsername(String username) {
         eleUsername.sendKeys(username);
         //actionBot.clearAndType(eleUsername,username);
@@ -43,6 +44,12 @@ public class LoginFactoryPage {
     public void clickLogin() {
         //eleLoginButton.click();
         actionBot.waitAndClick(byLoginButton);
+    }
+
+    public void login(String username, String password){
+        typeUsername(username);
+        typePassword(password);
+        clickLogin();
     }
 
     public String getError() {

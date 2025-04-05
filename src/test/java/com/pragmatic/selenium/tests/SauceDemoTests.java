@@ -39,7 +39,8 @@ public class SauceDemoTests {
 
     @Test
     public void testLoginWithValidCredentials() {
-        loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
+        loginFactoryPage.login("standard_user","secret_sauce");
+        //loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
         //Validation
         Assert.assertEquals(inventoryPage.getTitle(), "Products", "Inventory Page Title Test Failed");
     }

@@ -9,9 +9,9 @@ public class CheckoutCompletePage {
     private final WebDriver driver;
     //Elements Definition
     @FindBy(className = "title")
-    WebElement eleTitle;
+    private WebElement eleTitle;
     @FindBy(className = "complete-text")
-    public WebElement eleCompleteMessage;
+    private WebElement eleCompleteMessage;
 
     public CheckoutCompletePage(WebDriver driver) {
         this.driver = driver;
@@ -22,4 +22,15 @@ public class CheckoutCompletePage {
         return eleTitle.getText();
     }
 
+    public WebElement getEleCompleteMessage() {
+        return eleCompleteMessage;
+    }
+
+    public void setEleCompleteMessage(WebElement eleCompleteMessage) {
+        this.eleCompleteMessage = eleCompleteMessage;
+    }
+
+    public void setEleTitle(WebElement eleTitle) {
+        this.eleTitle = eleTitle;
+    }
 }

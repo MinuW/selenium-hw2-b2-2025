@@ -14,15 +14,24 @@ public class CheckoutOverviewPage {
     @FindBy(xpath = "//div[@class='summary_total_label']")
     private WebElement eleTotal;
     @FindBy(xpath = "//button[@id='finish']")
-    WebElement elemFinishButton;
-    @FindBy(className = "title")
-    WebElement eleTitle;
-
+    private WebElement elemFinishButton;
 
     public CheckoutOverviewPage(WebDriver driver) {
         this.driver = driver;
+
         PageFactory.initElements(driver, this);
     }
+
+    public WebElement getEleTitle() {
+        return eleTitle;
+    }
+
+    public void setEleTitle(WebElement eleTitle) {
+        this.eleTitle = eleTitle;
+    }
+
+    @FindBy(className = "title")
+    private WebElement eleTitle;
 
     public String getTitle() {
         return eleTitle.getText();
@@ -47,4 +56,5 @@ public class CheckoutOverviewPage {
     public void setEleTotal(WebElement eleTotal) {
         this.eleTotal = eleTotal;
     }
+
 }
