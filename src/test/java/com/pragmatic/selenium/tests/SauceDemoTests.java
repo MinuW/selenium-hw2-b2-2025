@@ -118,6 +118,6 @@ public class SauceDemoTests {
         checkoutOverviewPage.clickFinish();//Navigate to CheckoutComplete Page
         //Validation
         Assert.assertEquals(checkoutCompletePage.getTitle(), "Checkout: Complete!", "Error - Checkout process incomplete");
-        Assert.assertEquals(checkoutCompletePage.eleCompleteMessage.getText(), "Your order has been dispatched, and will arrive just as fast as the pony can get there!", "Error in checkout completion");
+        Assert.assertEquals(checkoutCompletePage.getEleCompleteMessage().getText(), "Your order has been dispatched, and will arrive just as fast as the pony can get there!", "Error in checkout completion");
     }
 }
