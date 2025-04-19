@@ -8,36 +8,34 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class LoginFactoryPage {
-    private final WebDriver driver;
-    private ActionBot actionBot;
+    private final ActionBot actionBot;
     //Elements Definition
-    @FindBy(id = "user-name")
+    private static @FindBy(id = "user-name")
     WebElement eleUsername;
-
-    @FindBy(id = "password")
+    private static @FindBy(id = "password")
     WebElement elePassword;
-
     private final By byLoginButton = By.id("login-button");
-
-    @FindBy(css = "h3[data-test='error']")
+    private static @FindBy(css = "h3[data-test='error']")
     WebElement eleLoginError;
+//    public final By byLoginError = By.cssSelector("[data-test='error']");
+
 
     public LoginFactoryPage(WebDriver driver) {
-        this.driver = driver;
         actionBot = new ActionBot(driver);
         //init element
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
     }
+
 
     public LoginFactoryPage typeUsername(String username) {
         eleUsername.sendKeys(username);
-        //actionBot.clearAndType(eleUsername,username);
+        //actionBot.clearAndType((By) eleUsername,username);
         return this;
     }
 
     public LoginFactoryPage typePassword(String password) {
         elePassword.sendKeys(password);
-        //actionBot.clearAndType(elePassword,password);
+        //actionBot.clearAndType((By) elePassword,password);
         return this;
     }
 
@@ -46,14 +44,21 @@ public class LoginFactoryPage {
         actionBot.waitAndClick(byLoginButton);
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
         typeUsername(username);
         typePassword(password);
         clickLogin();
     }
 
-    public String getError() {
+//    public static WebElement getEleLoginError() {
+//        return eleLoginError;
+//    }
+//
+//    public static void setEleLoginError(WebElement eleLoginError) {
+//        LoginFactoryPage.eleLoginError = eleLoginError;
+//    }
+
+    public static String errorMessage() {
         return eleLoginError.getText();
     }
-
 }

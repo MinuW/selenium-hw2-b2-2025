@@ -14,7 +14,7 @@ public class ActionBot {
 
     public ActionBot(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(2));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
     }
     /**
     Wait and click on the element located by a given locator
@@ -25,7 +25,7 @@ public class ActionBot {
     }
     /**
     Clear field located by a given locator
-    @param by
+    @param by  given locator
      */
     public void clear(By by){
         driver.findElement(by).clear();

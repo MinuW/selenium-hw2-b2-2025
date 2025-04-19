@@ -12,6 +12,11 @@
                 <include name="testOrderCompletionPage"/>
             </methods>
             </class>
+            <class name="com.pragmatic.selenium.tests.CrossBrowserBrowserFactoryTest">
+                <methods>
+                    <include name="testLoginWithChrome"/>
+                </methods>
+            </class>
         </classes>
     </test>
 </suite>

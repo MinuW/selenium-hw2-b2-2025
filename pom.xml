@@ -3,11 +3,9 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.example</groupId>
     <artifactId>selenium-hw2-b2-2025</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -15,18 +13,18 @@
         <selenium-java.version>4.29.0</selenium-java.version>
         <testng.version>7.11.0</testng.version>
         <datafaker.version>2.4.2</datafaker.version>
-
+        <log4j-core.version>2.24.3</log4j-core.version>
+        <log4j-api.version>2.24.3</log4j-api.version>
     </properties>
-    <!-- Selenium Java-->
-    <!-- TestNg-->
-    <dependencies>
+    <!--Selenium Java-->
+        <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium-java.version}</version>
         </dependency>
-
+    <!--TestNg-->
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -34,15 +32,24 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-
-
+    <!--Data-faker-->
         <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
         <dependency>
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
             <version>${datafaker.version}</version>
         </dependency>
-
-
+    <!--Log4j-core-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j-core.version}</version>
+        </dependency>
+    <!--Log4j-api-->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j-api.version}</version>
+        </dependency>
     </dependencies>
 </project>

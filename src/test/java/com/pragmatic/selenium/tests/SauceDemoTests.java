@@ -1,14 +1,18 @@
 package com.pragmatic.selenium.tests;
 
 import com.pragmatic.selenium.pages.*;
+import com.pragmatic.selenium.util.BrowserFactory;
+import com.pragmatic.selenium.util.ConfigurationReader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class SauceDemoTests {
+    private static final Logger log = LogManager.getLogger(SauceDemoTests.class);
     WebDriver driver;
     LoginFactoryPage loginFactoryPage;
     InventoryPage inventoryPage;
@@ -19,9 +23,16 @@ public class SauceDemoTests {
 
     @BeforeMethod
     public void setUp() {
-        driver = new FirefoxDriver();
-        driver.get("https://www.saucedemo.com/");
+        //driver = new FirefoxDriver();
+        log.info("Initializing the browser");
+        BrowserFactory.init(ConfigurationReader.getBrowser());
+        log.info("Get browser Properties");
+        driver= BrowserFactory.getDriver();
+        log.debug("Reading from Configuration file");
+        driver.get(ConfigurationReader.getBaseURL());//Reading from Configuration file
+        log.info("Navigate to https://www.saucedemo.com/");
         driver.manage().window().maximize();//Open the Sauce Demo website
+
         loginFactoryPage = new LoginFactoryPage(driver);
         inventoryPage = new InventoryPage(driver);
         cartPage = new CartPage(driver);
@@ -43,14 +54,18 @@ public class SauceDemoTests {
         //loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
         //Validation
         Assert.assertEquals(inventoryPage.getTitle(), "Products", "Inventory Page Title Test Failed");
+        log.debug("Logged into Sauce Demo website");
     }
 
     @Test
     public void testAddProductsToCart() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
-        inventoryPage.addItems();//Add items to Cart
+        log.info("User Logged into Inventory Page");
+        inventoryPage.addItemsToCart();// Add items to Cart
+        log.info("Add items to Cart");
         //Assert.assertTrue((inventoryPage.itemCountConverted) == (3), "Item Count is wrong in the Cart Badge");//Verify added item count shows at cart badge
         inventoryPage.goToCart();//Navigate to Cart Page
+        log.info("Navigate to Cart Page");
         //Validation
         Assert.assertEquals(cartPage.getTitle(), "Your Cart", "Navigation Failed - Go to Your Cart Page ");//Verify Navigation to Cart
     }
@@ -58,7 +73,7 @@ public class SauceDemoTests {
     @Test
     public void testProductsInTheCart() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
-        inventoryPage.addItems();//Add items to Cart
+        inventoryPage.addItemsToCart();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         validateCartItems();
         validateItemPrice();
@@ -83,7 +98,7 @@ public class SauceDemoTests {
     @Test
     public void testUserDetails() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItems();//Add items to Cart
+        inventoryPage.addItemsToCart();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         //Validation
@@ -95,7 +110,7 @@ public class SauceDemoTests {
     @Test
     public void testOrderCheckOutDetails() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItems();//Add items to Cart
+        inventoryPage.addItemsToCart();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         CheckoutInformationPage.clearAndTypePersonalDetails();//Fill out user details
@@ -110,7 +125,7 @@ public class SauceDemoTests {
     @Test
     public void testOrderCompletionPage() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItems();//Add items to Cart
+        inventoryPage.addItemsToCart();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         CheckoutInformationPage.clearAndTypePersonalDetails();//Fill out user details

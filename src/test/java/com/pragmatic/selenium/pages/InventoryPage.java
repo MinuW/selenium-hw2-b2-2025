@@ -2,13 +2,14 @@ package com.pragmatic.selenium.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public class InventoryPage {
     private final WebDriver driver;
     private final By byTitle = By.cssSelector(".title");
-    private final By byItemNameOne;
-    private final By byItemNameTwo;
-    private final By byItemNameThree;
+    private final By byItemName;
     private final By byCartCountBadge;
     public int itemCountConverted;
     private final By byCartIcon;
@@ -16,11 +17,21 @@ public class InventoryPage {
 
     public InventoryPage(WebDriver driver) {
         this.driver = driver;
-        byItemNameOne = By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']");
-        byItemNameTwo = By.xpath("//button[@id='add-to-cart-sauce-labs-fleece-jacket']");
-        byItemNameThree = By.xpath("//button[@id='add-to-cart-sauce-labs-bike-light']");
+
+        byItemName = By.xpath("//div[@class='inventory_item_name ']");
         byCartCountBadge = By.xpath("//span[@class = 'shopping_cart_badge']");
         byCartIcon = By.xpath("//a[@class='shopping_cart_link']");
+    }
+
+    public void addItemsToCart() {
+        String [] productName = {"Sauce Labs Backpack","Sauce Labs Fleece Jacket","Sauce Labs Bike Light"};
+        List<WebElement> products = driver.findElements(byItemName);
+        String xpathButton = ("//div[text()='%s']/ancestor::div[@data-test='inventory-item']/descendant::button");
+
+        for (String s : productName) {
+            String xpathProduct = String.format(xpathButton,s);
+            driver.findElement(By.xpath(xpathProduct)).click();
+        }
     }
 
     public String getTitle() {
@@ -37,11 +48,11 @@ public class InventoryPage {
         return itemCountConverted;
     }
 
-    public void addItems() {
-        driver.findElement(this.byItemNameOne).click();
-        driver.findElement(this.byItemNameTwo).click();
-        driver.findElement(this.byItemNameThree).click();
-    }
+//    public void addItems() {
+//        driver.findElement(this.byItemName).click();
+//        driver.findElement(this.byItemNameTwo).click();
+//        driver.findElement(this.byItemNameThree).click();
+//    }
 
     public void goToCart() {
         driver.findElement(this.byCartIcon).click();//Cart Navigation
