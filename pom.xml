@@ -15,16 +15,19 @@
         <datafaker.version>2.4.2</datafaker.version>
         <log4j-core.version>2.24.3</log4j-core.version>
         <log4j-api.version>2.24.3</log4j-api.version>
+        <cucumber-java.version>7.22.0</cucumber-java.version>
+        <cucumber-testng.version>7.22.0</cucumber-testng.version>
+        <cucumber-reporting.version>5.8.4</cucumber-reporting.version>
     </properties>
     <!--Selenium Java-->
-        <dependencies>
+    <dependencies>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>${selenium-java.version}</version>
         </dependency>
-    <!--TestNg-->
+        <!--TestNg-->
         <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
@@ -32,24 +35,43 @@
             <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
-    <!--Data-faker-->
+        <!--Data-faker-->
         <!-- https://mvnrepository.com/artifact/net.datafaker/datafaker -->
         <dependency>
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
             <version>${datafaker.version}</version>
         </dependency>
-    <!--Log4j-core-->
+        <!--Log4j-core-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>${log4j-core.version}</version>
         </dependency>
-    <!--Log4j-api-->
+        <!--Log4j-api-->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <version>${log4j-api.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber-testng.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>${cucumber-reporting.version}</version>
+        </dependency>
     </dependencies>
+
 </project>

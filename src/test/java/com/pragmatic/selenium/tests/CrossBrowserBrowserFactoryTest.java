@@ -34,7 +34,7 @@ public class CrossBrowserBrowserFactoryTest {
     }
 
     @Test
-    public void testLoginWithChrome(){
+    public void testLoginWithChrome()throws InterruptedException{
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");     //Type Valid Password
         driver.findElement(By.id("login-button")).click();//Click Login Button
@@ -45,6 +45,16 @@ public class CrossBrowserBrowserFactoryTest {
 
     @Test
     public void testLoginWithFirefox(){
+        driver.findElement(By.id("user-name")).sendKeys("standard_user");
+        driver.findElement(By.id("password")).sendKeys("secret_sauce");     //Type Valid Password
+        driver.findElement(By.id("login-button")).click();//Click Login Button
+        String actualTitle = driver.findElement(By.cssSelector(".title")).getText();
+        Assert.assertEquals(actualTitle,"Products","Login failed - Page title mismatch.");
+
+    }
+
+    @Test
+    public void testLoginWithEdge(){
         driver.findElement(By.id("user-name")).sendKeys("standard_user");
         driver.findElement(By.id("password")).sendKeys("secret_sauce");     //Type Valid Password
         driver.findElement(By.id("login-button")).click();//Click Login Button

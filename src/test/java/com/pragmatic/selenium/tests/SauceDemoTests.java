@@ -61,19 +61,24 @@ public class SauceDemoTests {
     public void testAddProductsToCart() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
         log.info("User Logged into Inventory Page");
-        inventoryPage.addItemsToCart();// Add items to Cart
-        log.info("Add items to Cart");
-        //Assert.assertTrue((inventoryPage.itemCountConverted) == (3), "Item Count is wrong in the Cart Badge");//Verify added item count shows at cart badge
+        addProductsToCartDynamically();
+        log.info("Added items to Cart");
         inventoryPage.goToCart();//Navigate to Cart Page
-        log.info("Navigate to Cart Page");
+        log.info("Navigated to Cart Page");
         //Validation
         Assert.assertEquals(cartPage.getTitle(), "Your Cart", "Navigation Failed - Go to Your Cart Page ");//Verify Navigation to Cart
+    }
+
+    private void addProductsToCartDynamically() {
+        inventoryPage.addProduct("Sauce Labs Backpack");
+        inventoryPage.addProduct("Sauce Labs Fleece Jacket");
+        inventoryPage.addProduct("Sauce Labs Bike Light");
     }
 
     @Test
     public void testProductsInTheCart() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//User Login
-        inventoryPage.addItemsToCart();//Add items to Cart
+        addProductsToCartDynamically();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         validateCartItems();
         validateItemPrice();
@@ -98,7 +103,7 @@ public class SauceDemoTests {
     @Test
     public void testUserDetails() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItemsToCart();//Add items to Cart
+        addProductsToCartDynamically();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         //Validation
@@ -110,7 +115,7 @@ public class SauceDemoTests {
     @Test
     public void testOrderCheckOutDetails() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItemsToCart();//Add items to Cart
+        addProductsToCartDynamically();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         CheckoutInformationPage.clearAndTypePersonalDetails();//Fill out user details
@@ -125,7 +130,7 @@ public class SauceDemoTests {
     @Test
     public void testOrderCompletionPage() {
         loginFactoryPage.typeUsername("standard_user").typePassword("secret_sauce").clickLogin();//Navigate to Cart Page
-        inventoryPage.addItemsToCart();//Add items to Cart
+        addProductsToCartDynamically();//Add items to Cart
         inventoryPage.goToCart();//Navigate to Cart Page
         cartPage.clickCheckOut();//Navigate to CheckoutInformation Page
         CheckoutInformationPage.clearAndTypePersonalDetails();//Fill out user details

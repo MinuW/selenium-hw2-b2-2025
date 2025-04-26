@@ -1,5 +1,6 @@
 package com.pragmatic.selenium.pages;
 
+import com.pragmatic.selenium.util.Products;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,6 +35,26 @@ public class InventoryPage {
         }
     }
 
+    public Products getProducts(String productName){
+        String xpathProductName = String.format("//div[text()='%s']", productName);
+        WebElement eleProductName = driver.findElement(By.xpath(xpathProductName));
+        WebElement eleItem = eleProductName.findElement(By.xpath(".//ancestor::div[@data-test='inventory-item']"));
+        Products products = new Products();
+        products.setName(productName);
+        products.setPrice(eleItem.findElement(By.cssSelector("[data-test='inventory-item-price']")).getText());
+        return products;
+    }
+
+    public void addProduct(String productName){
+        String xpathProductName = String.format("//div[text()='%s']", productName);
+        WebElement eleProductName = driver.findElement(By.xpath(xpathProductName));
+        WebElement eleItem = eleProductName.findElement(By.xpath(".//ancestor::div[@data-test='inventory-item']"));
+
+        WebElement eleAddToCartButton = eleItem.findElement(By.xpath(".//button"));
+        eleAddToCartButton.click();
+
+    }
+
     public String getTitle() {
         return driver.findElement(byTitle).getText();
     }
@@ -48,11 +69,6 @@ public class InventoryPage {
         return itemCountConverted;
     }
 
-//    public void addItems() {
-//        driver.findElement(this.byItemName).click();
-//        driver.findElement(this.byItemNameTwo).click();
-//        driver.findElement(this.byItemNameThree).click();
-//    }
 
     public void goToCart() {
         driver.findElement(this.byCartIcon).click();//Cart Navigation
